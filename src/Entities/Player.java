@@ -1,6 +1,7 @@
 package Entities;
 
 import Resources.PictureLoader;
+import Resources.Props;
 import it.marteEngine.entity.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
@@ -21,8 +22,11 @@ public class Player extends Entity
     {
         super(x, y);
         setGraphic(PictureLoader.getImage("Demoman Red"));
-        setHitBox(24, 22, 36 -24, 64 -22);
-        //@todo read hitbox from a file for each character (? settings ?)
+        int hBX = Props.getPropInt("Player.Soldier.Hitbox.X");
+        int hBY = Props.getPropInt("Player.Soldier.Hitbox.Y");
+        int hBW = Props.getPropInt("Player.Soldier.Hitbox.Width");
+        int hBH = Props.getPropInt("Player.Soldier.Hitbox.Height");
+        setHitBox(hBX, hBY, hBW,hBH);
         addType(TYPE,ENTITY,NAME);
         name = NAME;
         

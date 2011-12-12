@@ -1,5 +1,6 @@
 package Entities;
 
+import Resources.Props;
 import it.marteEngine.entity.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -14,8 +15,7 @@ public class InfoText extends Entity
 {
     public InfoText()
     {
-        super(10,10);
-        //@todo read positions from file
+        super(0,0);
     }
 
     @Override
@@ -29,6 +29,6 @@ public class InfoText extends Entity
     {
         String s = "FPS: " + container.getFPS()
                 + "\nEntities: " + world.getNrOfEntities("ENTITY");                     
-        g.drawString(s, 10, 10);
+        g.drawString(s,Props.getPropFloat("InfoText.X"),Props.getPropFloat("InfoText.Y"));
     }    
 }

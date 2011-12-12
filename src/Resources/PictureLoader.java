@@ -15,16 +15,14 @@ import org.newdawn.slick.util.ResourceLoader;
  * @since 11.12.2011
  */
 public class PictureLoader
-{
-    private final static String PATH = "Assets/Sprites/res.dat";
-    
+{  
     private static HashMap<String,Image> images;
     
     
     public static void initLoader()
     {
         images = new HashMap<String, Image>();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(PATH)));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(Props.getPropStr("Resource.Picture.Path"))));
         try
         {
             String line; 

@@ -1,5 +1,6 @@
 package Core;
 
+import Resources.Props;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,12 +12,10 @@ import java.io.IOException;
  */
 public class Log
 {
-    private static final boolean DEBUG = true;
-    //@todo read Debug var from file
     
     public static void Debug(String className, Object message)
     {
-        if (!DEBUG)
+        if (!Props.getPropBool("Debug"))
         {
             return;
         }

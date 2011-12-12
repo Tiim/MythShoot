@@ -16,14 +16,13 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public class MapLoader
 {
-
-    private final static String PATH = "Assets/Maps/res.dat";
     private static HashMap<String, Map> maps;
 
     public static void initLoader(World gameWorld)
     {
+        String path = Props.getPropStr("Resource.Map.Path");
         maps = new HashMap<String, Map>();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(PATH)));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(path)));
         try
         {
             while (reader.ready())
@@ -38,8 +37,8 @@ public class MapLoader
                 }
                 String[] args = line.split(";");
                 String key = args[0].trim();
-                String path = args[1].trim();
-                Map map = new Map(0,0,new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(path))),key,gameWorld);
+                String resPath = args[1].trim();
+                Map map = new Map(0,0,new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(resPath))),key,gameWorld);
                 gameWorld.add(map);
                 maps.put(key,map);
             }
