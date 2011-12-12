@@ -12,6 +12,7 @@ import java.io.IOException;
 public class Log
 {
     private static final boolean DEBUG = true;
+    //@todo read Debug var from file
     
     public static void Debug(String className, Object message)
     {

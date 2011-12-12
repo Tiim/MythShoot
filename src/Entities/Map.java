@@ -20,6 +20,8 @@ public class Map extends Entity
 {
     float XOffset = 0;
     float YOffset = 100;
+    //@todo read offset from the Mapfile
+    
     private ArrayList<String> lines;
 
     public Map(float x, float y, BufferedReader br, String name,World world)
@@ -30,7 +32,6 @@ public class Map extends Entity
         lines = new ArrayList<String>();
         try
         {
-            int count = 0;
             while (br.ready())
             {
                 try
@@ -61,6 +62,7 @@ public class Map extends Entity
                 {
                     switch (charry[tileX])
                     {
+                        //@todo use tilewidth and height from the mapfile
                         case 's':
                             world.add(new MapElement(tileX * 32 + XOffset, tileY * 32 + YOffset, PictureLoader.getImage("Wall Stone"), name));
                             break;
@@ -79,7 +81,7 @@ public class Map extends Entity
 
     public void removeWalls()
     {
-        for (Entity e : world.getEntities(name))
+        for (Entity e : world.getEntities("WALL"))
         {
             e.destroy();
         }

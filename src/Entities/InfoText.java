@@ -15,6 +15,7 @@ public class InfoText extends Entity
     public InfoText()
     {
         super(10,10);
+        //@todo read positions from file
     }
 
     @Override

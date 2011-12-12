@@ -22,6 +22,7 @@ public class Player extends Entity
         super(x, y);
         setGraphic(PictureLoader.getImage("Demoman Red"));
         setHitBox(24, 22, 36 -24, 64 -22);
+        //@todo read hitbox from a file for each character (? settings ?)
         addType(TYPE,ENTITY,NAME);
         name = NAME;
         
@@ -55,12 +56,11 @@ public class Player extends Entity
         if(collide("WALL", x, y) != null)
         {
             float dX = x - previousx;
-            float dY = y - previousy;
-            //while (collide("WALL",x,y) != null)
-            //{                
-                x -= dX;
-                y -= dY;
-            //}
+            float dY = y - previousy;               
+            x -= dX;
+            y -= dY;
+            
+            //@fixme move up or down while running against a wall
         }
     } 
 }
