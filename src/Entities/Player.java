@@ -21,7 +21,7 @@ public class Player extends Entity
     public Player(float x, float y)
     {
         super(x, y);
-        setGraphic(PictureLoader.getImage("Demoman Red"));
+        setGraphic(PictureLoader.getImage("Soldier Red"));
         int hBX = Props.getPropInt("Player.Soldier.Hitbox.X");
         int hBY = Props.getPropInt("Player.Soldier.Hitbox.Y");
         int hBW = Props.getPropInt("Player.Soldier.Hitbox.Width");

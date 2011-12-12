@@ -2,6 +2,7 @@ package Entities;
 
 import Core.Log;
 import Resources.PictureLoader;
+import Resources.Props;
 import it.marteEngine.World;
 import it.marteEngine.entity.Entity;
 import java.io.BufferedReader;
@@ -18,9 +19,8 @@ import org.newdawn.slick.SlickException;
  */
 public class Map extends Entity
 {
-    float XOffset = 0;
-    float YOffset = 100;
-    //@todo read offset from the Mapfile
+    float XOffset;
+    float YOffset;
     
     private ArrayList<String> lines;
 
@@ -32,6 +32,8 @@ public class Map extends Entity
         lines = new ArrayList<String>();
         try
         {
+            XOffset = Integer.parseInt(br.readLine().trim());
+            YOffset = Integer.parseInt(br.readLine().trim());
             while (br.ready())
             {
                 try
@@ -53,6 +55,8 @@ public class Map extends Entity
         {
             Log.Exception(ex);
         }
+        int tileWidth = Props.getPropInt("Map.Element.Width");
+        int tileHeight = Props.getPropInt("Map.Element.Height");
         for (int tileY = 0; tileY < lines.size(); tileY++)
         {
             char[] charry = lines.get(tileY).toCharArray();
@@ -62,12 +66,11 @@ public class Map extends Entity
                 {
                     switch (charry[tileX])
                     {
-                        //@todo use tilewidth and height from the mapfile
                         case 's':
-                            world.add(new MapElement(tileX * 32 + XOffset, tileY * 32 + YOffset, PictureLoader.getImage("Wall Stone"), name));
+                            world.add(new MapElement(tileX * tileHeight + XOffset, tileY * tileWidth + YOffset, PictureLoader.getImage("Wall Stone"), name));
                             break;
                         case 'w':
-                            world.add(new MapElement(tileX * 32 + XOffset, tileY * 32 + YOffset, PictureLoader.getImage("Wall Wood"), name));
+                            world.add(new MapElement(tileX * tileHeight + XOffset, tileY * tileWidth + YOffset, PictureLoader.getImage("Wall Wood"), name));
                             break;
                     }
                 }
