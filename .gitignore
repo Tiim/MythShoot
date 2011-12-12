@@ -1,0 +1,35 @@
+log.txt
+
+
+#Linux scripts
+*.sh
+
+
+#Folders
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+lib/javadoc/
+*javadoc/
+
+
+#Some platformspecific files
+#Windows
+
+Thumbs.db 
+Desktop.ini
+
+#OSX
+.DS_Store
+.Spotlight-V100
+.Trashes
+._*
+#Linux
+
+.*
+!.gitignore
+*~
+.directory
+
