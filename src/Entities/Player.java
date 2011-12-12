@@ -1,6 +1,5 @@
 package Entities;
 
-import Core.Log;
 import Resources.PictureLoader;
 import it.marteEngine.entity.Entity;
 import org.newdawn.slick.GameContainer;
@@ -55,7 +54,13 @@ public class Player extends Entity
         }
         if(collide("WALL", x, y) != null)
         {
-            Log.Debug(this.getClass().getName(), "Collide");
+            float dX = x - previousx;
+            float dY = y - previousy;
+            //while (collide("WALL",x,y) != null)
+            //{                
+                x -= dX;
+                y -= dY;
+            //}
         }
     } 
 }

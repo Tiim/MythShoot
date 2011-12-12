@@ -16,5 +16,6 @@ public class MapElement extends Entity
     {
         super(x, y, image);
         addType(TYPE,ENTITY,type);
+        setHitBox(0,0,32,32);
     }
 }

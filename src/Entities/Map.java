@@ -18,7 +18,8 @@ import org.newdawn.slick.SlickException;
  */
 public class Map extends Entity
 {
-
+    float XOffset = 0;
+    float YOffset = 100;
     private ArrayList<String> lines;
 
     public Map(float x, float y, BufferedReader br, String name,World world)
@@ -61,10 +62,10 @@ public class Map extends Entity
                     switch (charry[tileX])
                     {
                         case 's':
-                            world.add(new MapElement(tileX * 32, tileY * 32, PictureLoader.getImage("Wall Stone"), name));
+                            world.add(new MapElement(tileX * 32 + XOffset, tileY * 32 + YOffset, PictureLoader.getImage("Wall Stone"), name));
                             break;
                         case 'w':
-                            world.add(new MapElement(tileX * 32, tileY * 32, PictureLoader.getImage("Wall Wood"), name));
+                            world.add(new MapElement(tileX * 32 + XOffset, tileY * 32 + YOffset, PictureLoader.getImage("Wall Wood"), name));
                             break;
                     }
                 }
