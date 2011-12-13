@@ -13,20 +13,20 @@ import java.io.IOException;
 public class Log
 {
     
-    public static void Debug(String className, Object message)
+    public static void Debug(Class c, Object message)
     {
         if (!Props.getPropBool("Debug"))
         {
             return;
         }
         String messageStr = (message == null)? "null" : message.toString();
-        String out = "DEBUG:  [" + className + "]  " + messageStr;
+        String out = "DEBUG:  [" + c.getName() + "]  " + messageStr;
         System.out.println(out);
     }
     
-    public static void Warning(String className, Object message)
+    public static void Warning(Class c, Object message)
     {
-        String out = "WARNING:  [" + className + "]  " + message.toString();
+        String out = "WARNING:  [" + c.getName() + "]  " + message.toString();
         System.out.println(out);
         save(out);
     }
@@ -38,7 +38,7 @@ public class Log
             out += "\t" + ex.toString() + "\n";
             for (StackTraceElement element : ex.getStackTrace())
                 out += "\t" + element.getClassName() + "." + element.getMethodName() + " : ( " + element.getLineNumber() + " )" + "\n";
-            System.out.println(out);
+            System.err.println(out);
             save(out);
     }
     

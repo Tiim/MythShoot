@@ -29,7 +29,7 @@ public class MapLoader
             {
                 String line = reader.readLine().trim();
 
-                Log.Debug(PictureLoader.class.getName(), line);
+                Log.Debug(PictureLoader.class, line);
 
                 if (line == null || line.isEmpty() || line.startsWith("#"))
                 {

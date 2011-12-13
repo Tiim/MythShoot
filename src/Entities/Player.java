@@ -1,11 +1,13 @@
 package Entities;
 
+import Core.Log;
 import Resources.PictureLoader;
 import Resources.Props;
 import it.marteEngine.entity.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 
 /**
  *
@@ -18,9 +20,13 @@ public class Player extends Entity
     public static final String TYPE = "CHARACTER";
     private static final String NAME = "PLAYER";
     
+    private boolean onGround;
+    private int jumpVel;
+    
     public Player(float x, float y)
     {
         super(x, y);
+        jumpVel = 0;
         setGraphic(PictureLoader.getImage("Soldier Red"));
         int hBX = Props.getPropInt("Player.Soldier.Hitbox.X");
         int hBY = Props.getPropInt("Player.Soldier.Hitbox.Y");
@@ -41,6 +47,12 @@ public class Player extends Entity
     {
         super.update(container, delta);
         
+        float yOld = y;
+        
+        if(!onGround)
+        {
+            y += 0.3 * delta;
+        }
         if (check("left"))
         {
             x -= 0.4 * delta;
@@ -49,22 +61,36 @@ public class Player extends Entity
         {
             x += 0.4 * delta;
         }
-        if (check("up"))
+        if (check("up") && onGround)
         {
-            y -= 0.4 * delta;
+            jumpVel = 4;
         }
+        else if (jumpVel > 0)
+        {
+            jumpVel -= 0.00001;
+        }            
         if (check("down"))
         {
             y += 0.4 * delta;
         }
+        
+        y -= jumpVel * delta;
+        onGround = false;
         if(collide("WALL", x, y) != null)
         {
             float dX = x - previousx;
             float dY = y - previousy;               
             x -= dX;
-            y -= dY;
-            
-            //@fixme move up or down while running against a wall
+            if (collide("WALL",x,y) != null)
+            {
+                x += dX;           
+                y -= dY;
+                if (collide("WALL",x,y) != null)
+                    x -= dX;
+                else if (dY > 0)
+                    onGround = true;
+            }
         }
+        
     } 
 }

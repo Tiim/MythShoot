@@ -31,7 +31,7 @@ public class GameWorld extends World
     public void init(GameContainer container, StateBasedGame game) throws SlickException
     {
         super.init(container, game);
-        Log.Debug(this.getClass().getName(), "init");
+        Log.Debug(this.getClass(), "init");
 
         addEntities();
 
@@ -41,7 +41,7 @@ public class GameWorld extends World
     public void enter(GameContainer container, StateBasedGame game) throws SlickException
     {
         super.enter(container, game);
-        Log.Debug(this.getClass().getName(), "enter");
+        Log.Debug(this.getClass(), "enter");
     }
 
     @Override

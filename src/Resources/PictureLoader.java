@@ -29,7 +29,7 @@ public class PictureLoader
             while ((line = reader.readLine()) != null )
             {
                 line = line.trim();
-                Log.Debug(PictureLoader.class.getName(),line);
+                Log.Debug(PictureLoader.class,line);
                 
                 if (line == null || line.isEmpty() || line.startsWith("#"))
                 {
