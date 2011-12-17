@@ -1,5 +1,7 @@
 package Entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -17,13 +19,17 @@ public class World implements GameState
     
     protected boolean acceptsInput = true;
     
+    protected List<Entity> entities;
+    
+    
     World(int ID)
     {
         this.ID = ID;
+        entities = new ArrayList<Entity>();
     }
     
     @Override
-    public int getID()
+    public final int getID()
     {
         return ID;
     }
@@ -37,13 +43,19 @@ public class World implements GameState
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException
     {
-        
+        for (Entity e : entities)
+        {
+            e.render(g, container);
+        }
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException
     {
-        
+        for (Entity e : entities)
+        {
+            e.update(container, game, delta);
+        }
     }
 
     @Override
@@ -190,4 +202,25 @@ public class World implements GameState
         
     }
     
+    public final List<Entity> getEntities(String... types)
+    {
+        List<Entity> ents = new ArrayList<Entity>();
+        for (Entity e : entities)
+        {
+            if (e.isType(types))
+                ents.add(e);
+        }
+        return ents;
+    }
+    
+    public final List<Entity> collidesWithEntities(Entity entity, String... types)   
+    {
+        List<Entity> ents = new ArrayList<Entity>();
+        for (Entity e : entities)
+        {
+            if (e.isType(types) && e.collides(entity))
+                ents.add(e);
+        }
+        return ents;
+    }
 }
