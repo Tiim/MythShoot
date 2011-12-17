@@ -2,7 +2,6 @@ package Entities;
 
 import Resources.PictureLoader;
 import Resources.Props;
-//import it.marteEngine.entity.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
