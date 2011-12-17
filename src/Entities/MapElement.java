@@ -1,8 +1,8 @@
 package Entities;
 
 import Resources.Props;
-import it.marteEngine.entity.Entity;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 /**
  *
@@ -11,12 +11,11 @@ import org.newdawn.slick.Image;
  */
 public class MapElement extends Entity
 {
-    private static final String ENTITY = "ENTITY";
     public static final String TYPE = "WALL";
-    public MapElement(float x, float y, Image image, String type)
+    public MapElement(float x, float y, Image image, World world) throws SlickException
     {
-        super(x, y, image);
-        addType(TYPE,ENTITY,type);
-        setHitBox(0,0,Props.getPropInt("Map.Element.Width"),Props.getPropInt("Map.Element.Height"));
+        super(x, y, image, world);
+        addType(TYPE);
+        setHitbox(0,0,Props.getPropInt("Map.Element.Width"),Props.getPropInt("Map.Element.Height"));
     }
 }

@@ -2,11 +2,12 @@ package Resources;
 
 import Core.Log;
 import Entities.Map;
-import it.marteEngine.World;
+import Entities.World;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.ResourceLoader;
 
 /**
@@ -18,7 +19,7 @@ public class MapLoader
 {
     private static HashMap<String, Map> maps;
 
-    public static void initLoader(World gameWorld)
+    public static void initLoader(World gameWorld) throws SlickException
     {
         String path = Props.getPropStr("Resource.Map.Path");
         maps = new HashMap<String, Map>();
@@ -38,8 +39,8 @@ public class MapLoader
                 String[] args = line.split(";");
                 String key = args[0].trim();
                 String resPath = args[1].trim();
-                Map map = new Map(0,0,new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(resPath))),key,gameWorld);
-                gameWorld.add(map);
+                Map map = new Map(0,0,new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(resPath))),gameWorld);
+                gameWorld.addEntities(map);
                 maps.put(key,map);
             }
         }

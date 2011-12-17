@@ -3,14 +3,14 @@ package Entities;
 import Core.Log;
 import Resources.PictureLoader;
 import Resources.Props;
-import it.marteEngine.World;
-import it.marteEngine.entity.Entity;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
 
 /**
  *
@@ -24,10 +24,9 @@ public class Map extends Entity
     
     private ArrayList<String> lines;
 
-    public Map(float x, float y, BufferedReader br, String name,World world)
+    public Map(float x, float y, BufferedReader br ,World world) throws SlickException
     {
-        super(x, y);
-        this.name = name;
+        super(x, y,world);
         this.world = world;
         lines = new ArrayList<String>();
         try
@@ -67,10 +66,10 @@ public class Map extends Entity
                     switch (charry[tileX])
                     {
                         case 's':
-                            world.add(new MapElement(tileX * tileHeight + XOffset, tileY * tileWidth + YOffset, PictureLoader.getImage("Wall Stone"), name));
+                            world.addEntities(new MapElement(tileX * tileHeight + XOffset, tileY * tileWidth + YOffset, PictureLoader.getImage("Wall Stone"), world));
                             break;
                         case 'w':
-                            world.add(new MapElement(tileX * tileHeight + XOffset, tileY * tileWidth + YOffset, PictureLoader.getImage("Wall Wood"), name));
+                            world.addEntities(new MapElement(tileX * tileHeight + XOffset, tileY * tileWidth + YOffset, PictureLoader.getImage("Wall Wood"), world));
                             break;
                     }
                 }
@@ -91,12 +90,14 @@ public class Map extends Entity
     }
 
     @Override
-    public void render(GameContainer container, Graphics g) throws SlickException
+    public void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
+        
     }
 
     @Override
-    public void update(GameContainer container, int delta) throws SlickException
+    public void render(Graphics g, GameContainer gc)
     {
+
     }
 }

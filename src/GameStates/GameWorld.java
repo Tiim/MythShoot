@@ -2,11 +2,10 @@ package GameStates;
 
 import Entities.Player;
 import Core.Log;
+import Entities.Entity;
 import Entities.InfoText;
+import Entities.World;
 import Resources.MapLoader;
-import it.marteEngine.Camera;
-import it.marteEngine.World;
-import it.marteEngine.entity.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -24,7 +23,7 @@ public class GameWorld extends World
     
     public GameWorld(int id, GameContainer container)
     {
-        super(id, container);
+        super(id);
     }
 
     @Override
@@ -47,35 +46,34 @@ public class GameWorld extends World
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException
     {
-        super.render(container, game, g);
-        infoText.render(container, g);        
+        super.render(container, game, g);        
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException
     {
         super.update(container, game, delta);
-        
-        float x = camera.getFollow().previousx - camera.getFollow().x;
-        float y = camera.getFollow().previousy - camera.getFollow().y;
-        
-        for(Entity e : getEntities())
-        {
-            e.x += x;
-            e.y += y;
-        }
+        /*
+            float x = camera.getFollow().previousx - camera.getFollow().x;
+            float y = camera.getFollow().previousy - camera.getFollow().y;
+
+            for(Entity e : getEntities())
+            {
+                e.x += x;
+                e.y += y;
+            }
+         */
         //camera.getFollow().x -= x;
         //camera.getFollow().y -= y;
     }
 
-    private void addEntities()
+    private void addEntities() throws SlickException
     {
-        add(MapLoader.getMap("Fort"));
-        Entity player = new Player(getWidth() / 2, getHeight() / 2);
-        add(player);
-        camera = new Camera(this, player, width, height);
+        addEntities(MapLoader.getMap("Fort"));
+        Entity player = new Player(container.getWidth() / 2, container.getHeight() / 2,this);
+        addEntities(player);
+        //camera = new Camera(this, player, width, height);
     
-        add(infoText = new InfoText());
-        infoText.visible = false;
+        addEntities(infoText = new InfoText(10,10,this));
     }
 }

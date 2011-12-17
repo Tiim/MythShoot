@@ -1,5 +1,6 @@
 package Entities;
 
+import Core.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +8,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -30,7 +32,7 @@ public abstract class Entity
     private Shape shape;
     private List<String> types;
 
-    Entity(int X, int Y, World world) throws SlickException
+    public Entity(float X, float Y, World world) throws SlickException
     {
         initEntity();
         position = new Vector2f(X, Y);
@@ -41,7 +43,7 @@ public abstract class Entity
         this.world = world;
     }
 
-    Entity(int X, int Y, Image image, World world) throws SlickException
+    public Entity(float X, float Y, Image image, World world) throws SlickException
     {
         initEntity();
         position = new Vector2f(X, Y);
@@ -53,7 +55,7 @@ public abstract class Entity
         this.world = world;
     }
 
-    Entity(int X, int Y, Animation animation, World world) throws SlickException
+    public Entity(float X, float Y, Animation animation, World world) throws SlickException
     {
         initEntity();
         position = new Vector2f(X, Y);
@@ -65,7 +67,7 @@ public abstract class Entity
         this.world = world;
     }
 
-    Entity(int X, int Y, Shape shape, World world) throws SlickException
+    public Entity(float X, float Y, Shape shape, World world) throws SlickException
     {
         initEntity();
         position = new Vector2f(X, Y);
@@ -77,7 +79,7 @@ public abstract class Entity
         this.world = world;
     }
 
-    Entity(int X, int Y, Image image, Shape shape, World world) throws SlickException
+    public Entity(float X, float Y, Image image, Shape shape, World world) throws SlickException
     {
         initEntity();
         position = new Vector2f(X, Y);
@@ -90,7 +92,7 @@ public abstract class Entity
         this.world = world;
     }
 
-    Entity(int X, int Y, Animation animation, Shape shape, World world) throws SlickException
+    public Entity(float X, float Y, Animation animation, Shape shape, World world) throws SlickException
     {
         initEntity();
         position = new Vector2f(X, Y);
@@ -157,6 +159,13 @@ public abstract class Entity
         speed.x += acceleration.x;
         speed.y += acceleration.y;
 
+        acceleration.x = Math.min(acceleration.x,1);
+        acceleration.y = Math.min(acceleration.y,1);
+        
+        speed.x = Math.min(speed.x,2);
+        speed.y = Math.min(speed.y,2);
+        
+        
         position.x += speed.x * delta;
         position.y += speed.y * delta;
 
@@ -174,6 +183,8 @@ public abstract class Entity
     {
         types = new ArrayList<String>();
         types.add("ALL");
+        acceleration = new Vector2f();
+        speed = new Vector2f();
     }
 
     public boolean isType(String... types)
@@ -205,5 +216,16 @@ public abstract class Entity
     public final boolean collides(Entity e)
     {
         return shape.intersects(e.getShape());
+    }
+    
+    public final Input getInput()
+    {
+        return world.getInput();
+    }
+
+    public void destroy()
+    {
+        world = null;
+        world.getEntities().remove(this);
     }
 }

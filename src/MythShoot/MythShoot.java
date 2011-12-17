@@ -2,10 +2,10 @@ package MythShoot;
 
 import GameStates.GameWorld;
 import Core.Log;
+import Entities.World;
 import Resources.MapLoader;
 import Resources.PictureLoader;
 import Resources.Props;
-import it.marteEngine.World;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
