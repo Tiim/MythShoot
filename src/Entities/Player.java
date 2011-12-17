@@ -1,5 +1,6 @@
 package Entities;
 
+import Core.Log;
 import Resources.PictureLoader;
 import Resources.Props;
 import org.newdawn.slick.GameContainer;
@@ -46,31 +47,42 @@ public class Player extends Entity
         }
         if (getInput().isKeyDown(Input.KEY_LEFT))
         {
-            speed.x -= 0.4 * delta;
+            speed.x -= 0.01;
         }
         if (getInput().isKeyDown(Input.KEY_RIGHT))
         {
-            speed.x += 0.4 * delta;
+            speed.x += 0.01;
         }
-        if (getInput().isKeyDown(Input.KEY_UP) && onGround)
+        if (getInput().isKeyDown(Input.KEY_UP) /*&& onGround*/)
         {
-            speed.y -= 3 * delta;
+            speed.y -= 0.01;
         }          
-        if (getInput().isKeyDown(Input.KEY_UP))
+        if (getInput().isKeyDown(Input.KEY_DOWN))
         {
-            speed.y += 0.4 * delta;
+            speed.y += 0.01;
         }
         
+        speed.x = Math.min(Math.max(speed.x,-0.1f),0.1f);
+        speed.y = Math.min(Math.max(speed.y,-0.1f),0.1f);
+        float speedxBackup = speed.x;
+        float speedyBackup = speed.y;
         onGround = false;
         if(world.collidesWithEntities(this,"wall") != null)
-        {           
+        {
+            Log.Debug(this.getClass(),"collision");
             position.x -= speed.x;
+            speed.x = 0;
             if (world.collidesWithEntities(this,"wall") != null)
             {
+                speed.x = speedxBackup;
                 position.x += speed.x;           
                 position.y -= speed.y;
+                speed.y = 0;
                 if (world.collidesWithEntities(this,"wall") != null)
+                {
                     position.x -= speed.x;
+                    speed.x = 0;
+                }
                 else if (speed.y > 0)
                     onGround = true;
             }

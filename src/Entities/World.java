@@ -232,7 +232,7 @@ public class World implements GameState
             if (e.isType(types) && e.collides(entity))
                 ents.add(e);
         }
-        return ents;
+        return (ents.isEmpty())? null:ents;
     }
 
     public Input getInput()

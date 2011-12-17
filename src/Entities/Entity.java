@@ -1,6 +1,6 @@
 package Entities;
 
-import Core.Log;
+import Resources.Props;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +22,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public abstract class Entity
 {
 
+    private final boolean debug = Props.getPropBool("Debug");
     protected Vector2f position;
     protected Vector2f speed;
     protected Vector2f acceleration;
@@ -135,23 +136,27 @@ public abstract class Entity
     {
         this.world = world;
     }
-    
+
     protected void addType(String... types)
     {
         this.types.addAll(Arrays.asList(types));
     }
-    
+
     public Shape getShape()
     {
         return shape;
-    }    
-    
+    }
+
     public void render(Graphics g, GameContainer gc)
     {
+
         if (image != null)
             image.draw(position.x, position.y);
         else if (animation != null)
             animation.draw(position.x, position.y);
+
+        if (debug && shape != null)
+            g.draw(shape);
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
@@ -159,13 +164,10 @@ public abstract class Entity
         speed.x += acceleration.x;
         speed.y += acceleration.y;
 
-        acceleration.x = Math.min(acceleration.x,1);
-        acceleration.y = Math.min(acceleration.y,1);
-        
-        speed.x = Math.min(speed.x,2);
-        speed.y = Math.min(speed.y,2);
-        
-        
+        acceleration.x = Math.min(acceleration.x, 1);
+        acceleration.y = Math.min(acceleration.y, 1);
+
+
         position.x += speed.x * delta;
         position.y += speed.y * delta;
 
@@ -174,7 +176,7 @@ public abstract class Entity
             shape.setX(position.x + hitboxOffset.x);
             shape.setY(position.y + hitboxOffset.y);
         }
-        
+
         if (animation != null)
             animation.update(delta);
     }
@@ -185,6 +187,7 @@ public abstract class Entity
         types.add("ALL");
         acceleration = new Vector2f();
         speed = new Vector2f();
+
     }
 
     public boolean isType(String... types)
@@ -217,7 +220,7 @@ public abstract class Entity
     {
         return shape.intersects(e.getShape());
     }
-    
+
     public final Input getInput()
     {
         return world.getInput();

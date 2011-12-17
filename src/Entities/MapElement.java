@@ -11,7 +11,7 @@ import org.newdawn.slick.SlickException;
  */
 public class MapElement extends Entity
 {
-    public static final String TYPE = "WALL";
+    public static final String TYPE = "wall";
     public MapElement(float x, float y, Image image, World world) throws SlickException
     {
         super(x, y, image, world);
