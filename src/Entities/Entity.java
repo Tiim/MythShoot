@@ -23,7 +23,7 @@ public abstract class Entity
 {
 
     private final boolean debug = Props.getPropBool("Debug");
-    protected Vector2f position;
+    private Vector2f position;
     protected Vector2f speed;
     protected Vector2f acceleration;
     private Vector2f hitboxOffset;
@@ -147,6 +147,29 @@ public abstract class Entity
         return shape;
     }
 
+    public Vector2f getPosition()
+    {
+        return position;
+    }
+
+    public void setPosition(Vector2f position)
+    {
+        this.position = position;
+        refreshPosition();
+    }
+    
+    public void setPositionX(float position)
+    {
+        this.position.x = position;
+        refreshPosition();
+    }
+    
+    public void setPositionY(float position)
+    {
+        this.position.y = position;
+        refreshPosition();
+    }
+
     public void render(Graphics g, GameContainer gc)
     {
 
@@ -161,15 +184,6 @@ public abstract class Entity
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
-        speed.x += acceleration.x;
-        speed.y += acceleration.y;
-
-        acceleration.x = Math.min(acceleration.x, 1);
-        acceleration.y = Math.min(acceleration.y, 1);
-
-
-        position.x += speed.x * delta;
-        position.y += speed.y * delta;
 
         if (shape != null && hitboxOffset != null)
         {
@@ -180,7 +194,15 @@ public abstract class Entity
         if (animation != null)
             animation.update(delta);
     }
-
+    
+    public void refreshPosition()
+    {
+        if (shape != null && hitboxOffset != null)
+        {
+            shape.setX(position.x + hitboxOffset.x);
+            shape.setY(position.y + hitboxOffset.y);
+        }
+    }
     private void initEntity() throws SlickException
     {
         types = new ArrayList<String>();

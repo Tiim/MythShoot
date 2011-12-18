@@ -20,6 +20,7 @@ public class GameWorld extends World
 {
     InfoText infoText;
     
+    //@todo camera
     
     public GameWorld(int id, GameContainer container)
     {
@@ -76,4 +77,5 @@ public class GameWorld extends World
     
         addEntities(infoText = new InfoText(10,10,this));
     }
+
 }
