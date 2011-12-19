@@ -71,6 +71,9 @@ public class Map extends Entity
                         case 'w':
                             world.addEntities(new MapElement(tileX * tileHeight + XOffset, tileY * tileWidth + YOffset, PictureLoader.getImage("Wall Wood"), world));
                             break;
+                        case 'g':
+                            world.addEntities(new MapElement(tileX * tileHeight + XOffset, tileY * tileWidth + YOffset, PictureLoader.getImage("Wall Gravel"), world));
+                            break;
                     }
                 }
                 catch (Exception ex)
@@ -99,5 +102,11 @@ public class Map extends Entity
     public void render(Graphics g, GameContainer gc)
     {
 
+    }
+    
+    @Override
+    protected boolean useCamera()
+    {
+        return false;
     }
 }

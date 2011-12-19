@@ -99,4 +99,10 @@ public class Player extends Entity
         
         refreshPosition();
     }
+
+    @Override
+    protected boolean useCamera()
+    {
+        return true;
+    }
 }

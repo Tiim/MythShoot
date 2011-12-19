@@ -172,11 +172,13 @@ public abstract class Entity
 
     public void render(Graphics g, GameContainer gc)
     {
-
+        float xOffset = (world.camera != null && useCamera())? world.camera.getOffsetX(): 0; 
+        float yOffset = (world.camera != null && useCamera())? world.camera.getOffsetY(): 0; 
+        
         if (image != null)
-            image.draw(position.x, position.y);
+            image.draw(position.x + xOffset, position.y + yOffset);
         else if (animation != null)
-            animation.draw(position.x, position.y);
+            animation.draw(position.x + xOffset, position.y + yOffset);
 
         if (debug && shape != null)
             g.draw(shape);
@@ -185,11 +187,7 @@ public abstract class Entity
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
 
-        if (shape != null && hitboxOffset != null)
-        {
-            shape.setX(position.x + hitboxOffset.x);
-            shape.setY(position.y + hitboxOffset.y);
-        }
+        refreshPosition();
 
         if (animation != null)
             animation.update(delta);
@@ -197,10 +195,12 @@ public abstract class Entity
     
     public void refreshPosition()
     {
+        float xOffset = (world.camera != null && useCamera())? world.camera.getOffsetX(): 0; 
+        float yOffset = (world.camera != null && useCamera())? world.camera.getOffsetY(): 0; 
         if (shape != null && hitboxOffset != null)
         {
-            shape.setX(position.x + hitboxOffset.x);
-            shape.setY(position.y + hitboxOffset.y);
+            shape.setX(position.x + hitboxOffset.x + xOffset);
+            shape.setY(position.y + hitboxOffset.y + yOffset);
         }
     }
     private void initEntity() throws SlickException
@@ -253,4 +253,6 @@ public abstract class Entity
         world = null;
         world.getEntities().remove(this);
     }
+    
+    protected abstract boolean useCamera();
 }

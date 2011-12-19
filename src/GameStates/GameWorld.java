@@ -2,6 +2,7 @@ package GameStates;
 
 import Entities.Player;
 import Core.Log;
+import Entities.Camera;
 import Entities.Entity;
 import Entities.InfoText;
 import Entities.World;
@@ -32,7 +33,7 @@ public class GameWorld extends World
     {
         super.init(container, game);
         Log.Debug(this.getClass(), "init");
-
+        
         addEntities();
 
     }
@@ -73,7 +74,7 @@ public class GameWorld extends World
         addEntities(MapLoader.getMap("Fort"));
         Entity player = new Player(container.getWidth() / 2, container.getHeight() / 2,this);
         addEntities(player);
-        //camera = new Camera(this, player, width, height);
+        camera = new Camera(player,this);
     
         addEntities(infoText = new InfoText(10,10,this));
     }

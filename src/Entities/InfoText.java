@@ -31,5 +31,12 @@ public class InfoText extends Entity
         String s = "FPS: " + container.getFPS()
                 + "\nEntities: " + world.getNrOfEntities("ENTITY");                     
         g.drawString(s,Props.getPropFloat("InfoText.X"),Props.getPropFloat("InfoText.Y"));
-    }    
+    } 
+    
+    
+    @Override
+    protected boolean useCamera()
+    {
+        return false;
+    }
 }

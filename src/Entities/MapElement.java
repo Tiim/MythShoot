@@ -18,4 +18,10 @@ public class MapElement extends Entity
         addType(TYPE);
         setHitbox(0,0,Props.getPropInt("Map.Element.Width"),Props.getPropInt("Map.Element.Height"));
     }
+    
+    @Override
+    protected boolean useCamera()
+    {
+        return true;
+    }
 }
