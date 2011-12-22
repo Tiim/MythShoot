@@ -26,3 +26,6 @@ Scout Blue Death        ;Assets/Sprites/Characters/Scout/blueDeath.png
 Wall Stone              ;Assets/Sprites/Walls/stone.png
 Wall Wood               ;Assets/Sprites/Walls/wood.png
 Wall Gravel             ;Assets/Sprites/Walls/gravel.png
+
+#Weapons
+Weapon                  ;Assets/Sprites/Weapons/weapon.png

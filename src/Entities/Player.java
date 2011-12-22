@@ -1,6 +1,5 @@
 package Entities;
 
-import Core.Log;
 import Resources.PictureLoader;
 import Resources.Props;
 import org.newdawn.slick.GameContainer;
@@ -21,10 +20,13 @@ public class Player extends Entity
     public static final String TYPE = "CHARACTER";
     private static final String NAME = "PLAYER";
     private boolean onGround;
+    private boolean viewDirectionRight;
+    private Weapon weapon;
 
     public Player(float x, float y, World world) throws SlickException
     {
         super(x, y, world);
+        viewDirectionRight = true;
         setImage(PictureLoader.getImage("Soldier Red"));
         int hBX = Props.getPropInt("Player.Soldier.Hitbox.X");
         int hBY = Props.getPropInt("Player.Soldier.Hitbox.Y");
@@ -32,6 +34,7 @@ public class Player extends Entity
         int hBH = Props.getPropInt("Player.Soldier.Hitbox.Height");
         setHitbox(hBX, hBY, hBW, hBH);
         addType(TYPE, ENTITY, NAME);
+        weapon = new Weapon(getPosition().x,getPosition().y,PictureLoader.getImage("Weapon"), this);
     }
 
     @Override
@@ -42,17 +45,32 @@ public class Player extends Entity
 
         if (!onGround)
         {
-            //speed.y += 0.01 * delta;
+            speed.y += 0.001 * delta;
         }
         if (getInput().isKeyDown(Input.KEY_LEFT))
             speed.x -= 0.01;
         if (getInput().isKeyDown(Input.KEY_RIGHT))
             speed.x += 0.01;
-        if (getInput().isKeyDown(Input.KEY_UP) /*&& onGround*/)
-            speed.y -= 0.01;
+        if (getInput().isKeyDown(Input.KEY_UP) && onGround)
+            speed.y -= 0.6;
         if (getInput().isKeyDown(Input.KEY_DOWN))
             speed.y += 0.01;
-
+        
+        if (!getInput().isKeyDown(Input.KEY_RIGHT) && !getInput().isKeyDown(Input.KEY_LEFT))
+            speed.x /= 1.7;
+        
+        if(getInput().getMouseX() < gc.getWidth() / 2 && viewDirectionRight)
+        {
+            setImage(PictureLoader.getImage("Soldier Red").getFlippedCopy(true,false));
+            viewDirectionRight = false;
+        }
+        else if (getInput().getMouseX() > gc.getWidth() / 2 && !viewDirectionRight)
+        {
+            setImage(PictureLoader.getImage("Soldier Red"));
+            viewDirectionRight = true;
+        }
+        
+       
         speed.x = Math.min(Math.max(speed.x, -0.5f), 0.5f);
         speed.y = Math.min(Math.max(speed.y, -0.5f), 0.5f);
         

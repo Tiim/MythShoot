@@ -16,28 +16,50 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- *
+ * Abstract base class of all entities
  * @author Tim
  */
 public abstract class Entity
 {
-
+    /** Intern variable for some debug things (Like drawing the colision shape) */
     private final boolean debug = Props.getPropBool("Debug");
+    /** The Position of the entity */
     private Vector2f position;
+    /** The actual Speed of the entity */
     protected Vector2f speed;
+    /** The actual acceleration of the entity */
     protected Vector2f acceleration;
+    /** Shape placing */
     private Vector2f hitboxOffset;
+    /** The world that contains this entity */
     protected World world;
+    /** The Image of that entity */
     private Image image;
+    /** The Animation of the entity */
     private Animation animation;
+    /** The shape of the entity */
     private Shape shape;
+    /** 
+     * Each Type is a group of one or more entities,
+     * that makes collisiondetecting between as example between Walls and Bullets easy 
+     */
     private List<String> types;
 
+    /** 
+     * Konstructor
+     * @param X The X position of the entity
+     * @param Y The Y position of the entity
+     * @param world The world
+     * @throws SlickException
+     */
     public Entity(float X, float Y, World world) throws SlickException
     {
+        /** Initialise the entity */
         initEntity();
+        /** Initialise the position */
         position = new Vector2f(X, Y);
-
+        
+        /** Throw exeption when world is null */
         if (isNull(world))
             throw new SlickException("Nullpointer");
 
