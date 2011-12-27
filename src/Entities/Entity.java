@@ -44,6 +44,8 @@ public abstract class Entity
      * that makes collisiondetecting between as example between Walls and Bullets easy 
      */
     private List<String> types;
+    
+    
 
     /** 
      * Konstructor
@@ -217,8 +219,8 @@ public abstract class Entity
     
     public void refreshPosition()
     {
-        float xOffset = (world.camera != null && useCamera())? world.camera.getOffsetX(): 0; 
-        float yOffset = (world.camera != null && useCamera())? world.camera.getOffsetY(): 0; 
+        float xOffset = (world.camera != null && useCamera())? world.camera.getOffsetX(): 0 /*+ image.getWidth() / 2*/; 
+        float yOffset = (world.camera != null && useCamera())? world.camera.getOffsetY(): 0 /*+ image.getHeight() / 2*/; 
         if (shape != null && hitboxOffset != null)
         {
             shape.setX(position.x + hitboxOffset.x + xOffset);

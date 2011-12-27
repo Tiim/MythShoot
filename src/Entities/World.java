@@ -53,6 +53,7 @@ public class World implements GameState
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException
     {
+        
         for (Entity e : entities)
             e.update(container, game, delta);
         if (camera != null)

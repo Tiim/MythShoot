@@ -3,6 +3,7 @@ package Entities;
 import Resources.PictureLoader;
 import Resources.Props;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
@@ -34,14 +35,14 @@ public class Player extends Entity
         int hBH = Props.getPropInt("Player.Soldier.Hitbox.Height");
         setHitbox(hBX, hBY, hBW, hBH);
         addType(TYPE, ENTITY, NAME);
-        weapon = new Weapon(getPosition().x,getPosition().y,PictureLoader.getImage("Weapon"), this);
+        weapon = new Weapon(getPosition().x,getPosition().y, this);
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
         super.update(gc, sbg, delta);
-
+        weapon.update(gc, sbg, delta);
 
         if (!onGround)
         {
@@ -100,7 +101,6 @@ public class Player extends Entity
             }
             refreshPosition();
         }
-
     }
 
     private void updateMovement(int delta)
@@ -122,5 +122,12 @@ public class Player extends Entity
     protected boolean useCamera()
     {
         return true;
+    }
+
+    @Override
+    public void render(Graphics g, GameContainer gc)
+    {
+        super.render(g, gc);
+        weapon.render(g,gc);
     }
 }

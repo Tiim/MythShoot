@@ -33,6 +33,8 @@ public final class Camera
     {
         cameraPosition = this.toFollow.getPosition();
         entityOffset = cameraPosition.negate();
+        entityOffset.x -= toFollow.getImage().getWidth() / 2;
+        entityOffset.y -= toFollow.getImage().getHeight() / 2;
     }
     
     /** @return The X offset */
