@@ -203,9 +203,6 @@ public abstract class Entity
             image.draw(position.x + xOffset, position.y + yOffset);
         else if (animation != null)
             animation.draw(position.x + xOffset, position.y + yOffset);
-
-        if (debug && shape != null)
-            g.draw(shape);
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta)

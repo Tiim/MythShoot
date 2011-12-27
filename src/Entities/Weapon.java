@@ -1,6 +1,7 @@
 package Entities;
 
 import Resources.PictureLoader;
+import Resources.Props;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -14,6 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Weapon
 {
+    boolean debug;
     Player owner;
     private float X,Y,rotation;
     private Image image;
@@ -25,6 +27,7 @@ public class Weapon
         this.Y = Y;
         this.owner = owner;
         this.image = PictureLoader.getImage("Weapon");
+        debug = Props.getPropBool("Debug");
     }
     
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
@@ -34,10 +37,10 @@ public class Weapon
         float mouseX = input.getMouseX();
         float mouseY = input.getMouseY();
         
-        this.X = owner.getPosition().x + owner.world.camera.getOffsetX();
-        this.Y = owner.getPosition().y + owner.world.camera.getOffsetY();
+        this.X = owner.getPosition().x + owner.world.camera.getOffsetX() + owner.getImage().getWidth() / 2 - image.getWidth() / 2;
+        this.Y = owner.getPosition().y + owner.world.camera.getOffsetY() + owner.getImage().getHeight() /1.5f - image.getHeight() /2;
         
-        rotation = (float) Math.toDegrees(Math.atan2(Y - mouseY , ((X - mouseX == 0)?  0.0001f : X - mouseX)) + 180f);
+        rotation = (float) Math.toDegrees(Math.atan2(Y + image.getHeight() /2 - mouseY , ((X + image.getWidth() / 2 - mouseX == 0)?  0.0001f : X + image.getWidth() / 2 - mouseX))) + 180;
     }
     
     public void render(Graphics g, GameContainer gc)
