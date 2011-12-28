@@ -21,12 +21,13 @@ public class Weapon
     private Image image;
     private int id;
     
-    public Weapon(float X, float Y, Player owner) throws SlickException
+    public Weapon(float X, float Y, int id, Player owner) throws SlickException
     {
         this.X = X;
         this.Y = Y;
         this.owner = owner;
-        this.image = PictureLoader.getImage("Weapon");
+        this.id = id;
+        this.image = PictureLoader.getImage("Weapon " + id);
         debug = Props.getPropBool("Debug");
     }
     

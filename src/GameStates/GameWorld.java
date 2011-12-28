@@ -1,7 +1,6 @@
 package GameStates;
 
 import Entities.Player;
-import Core.Log;
 import Entities.Camera;
 import Entities.Entity;
 import Entities.InfoText;
@@ -93,7 +92,7 @@ public class GameWorld extends World
         /** Add all wall elements */
         addEntities(MapLoader.getMap("Fort"));
         /** Add the Player */
-        Entity player = new Player(container.getWidth() / 2, container.getHeight() / 2,this);
+        Entity player = new Player(container.getWidth() / 2, container.getHeight() / 2,1,this);
         addEntities(player);
         /** Initialise the camere */
         camera = new Camera(player,this);

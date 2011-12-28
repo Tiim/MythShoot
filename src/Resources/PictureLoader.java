@@ -54,8 +54,11 @@ public class PictureLoader
         }
     }
     
-    public static Image getImage(String key)
+    public static Image getImage(String key) throws SlickException
     {
-        return images.get(key.trim());
+        Image img = images.get(key.trim());
+        if (img == null)
+            throw new SlickException("Image " + key + " not found!");
+        return img;
     }
 }

@@ -8,6 +8,7 @@ import org.newdawn.slick.geom.Vector2f;
  */
 public final class Camera
 {
+
     /** The actual camera position */
     private Vector2f cameraPosition;
     /** The offset of the entities */
@@ -21,13 +22,13 @@ public final class Camera
      * @param toFollow the entity wich should be in the middle
      * @param world  The World
      */
-    public Camera(Entity toFollow ,World world)
+    public Camera(Entity toFollow, World world)
     {
         this.toFollow = toFollow;
-        update();
         this.world = world;
+        update();
     }
-    
+
     /** Updates the offsetvariables */
     public void update()
     {
@@ -36,16 +37,16 @@ public final class Camera
         entityOffset.x -= toFollow.getImage().getWidth() / 2;
         entityOffset.y -= toFollow.getImage().getHeight() / 2;
     }
-    
+
     /** @return The X offset */
     public float getOffsetX()
     {
-        return entityOffset.x + world.container.getWidth() / 2f /*- world.container.getScreenWidth() / 2*/;
+        return entityOffset.x + world.container.getWidth() / 2f;
     }
-    
+
     /** @return The Y offset */
     public float getOffsetY()
     {
-        return entityOffset.y + world.container.getHeight() / 2f /*- world.container.getScreenHeight() / 2*/;
+        return entityOffset.y + world.container.getHeight() / 2f;
     }
 }

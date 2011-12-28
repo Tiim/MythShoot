@@ -64,7 +64,7 @@ public class Props
         return Double.parseDouble(getPropStr(key));
     }
     
-    public static void setSetting(String key, String value)
+    public static void setProp(String key, String value)
     {
         properties.setProperty(key, value);
     }

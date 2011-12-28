@@ -1,26 +1,26 @@
 #Soldier
-Soldier Red             ;Assets/Sprites/Characters/Soldier/red.png
-Soldier Red Move        ;Assets/Sprites/Characters/Soldier/redMove.png
-Soldier Red Death       ;Assets/Sprites/Characters/Soldier/redDeath.png
-Soldier Blue            ;Assets/Sprites/Characters/Soldier/blue.png
-Soldier Blue Move       ;Assets/Sprites/Characters/Soldier/blueMove.png
-Soldier Blue Death      ;Assets/Sprites/Characters/Soldier/blueDeath.png
+Character 1 true             ;Assets/Sprites/Characters/Soldier/red.png
+character 1 true Move        ;Assets/Sprites/Characters/Soldier/redMove.png
+Character 1 true Death       ;Assets/Sprites/Characters/Soldier/redDeath.png
+Character 1 false            ;Assets/Sprites/Characters/Soldier/blue.png
+Character 1 false Move       ;Assets/Sprites/Characters/Soldier/blueMove.png
+Character 1 false Death      ;Assets/Sprites/Characters/Soldier/blueDeath.png
 
 #Demoman
-Demoman Red             ;Assets/Sprites/Characters/Demoman/red.png
-Demoman Red Move        ;Assets/Sprites/Characters/Demoman/redMove.png
-Demoman Red Death       ;Assets/Sprites/Characters/Demoman/redDeath.png
-Demoman Blue            ;Assets/Sprites/Characters/Demoman/blue.png
-Demoman Blue Move       ;Assets/Sprites/Characters/Demoman/blueMove.png
-Demoman Blue Death      ;Assets/Sprites/Characters/Demoman/blueDeath.png
+Character 2 true             ;Assets/Sprites/Characters/Demoman/red.png
+Character 2 true Move        ;Assets/Sprites/Characters/Demoman/redMove.png
+Character 2 true Death       ;Assets/Sprites/Characters/Demoman/redDeath.png
+Character 2 false            ;Assets/Sprites/Characters/Demoman/blue.png
+Character 2 false Move       ;Assets/Sprites/Characters/Demoman/blueMove.png
+Character 2 false Death      ;Assets/Sprites/Characters/Demoman/blueDeath.png
 
 #Scout
-Scout Red               ;Assets/Sprites/Characters/Scout/red.png
-Scout Red Move          ;Assets/Sprites/Characters/Scout/redMove.png
-Scout Red Death         ;Assets/Sprites/Characters/Scout/redDeath.png
-Scout Blue              ;Assets/Sprites/Characters/Scout/blue.png
-Scout Blue Move         ;Assets/Sprites/Characters/Scout/blueMove.png
-Scout Blue Death        ;Assets/Sprites/Characters/Scout/blueDeath.png
+Character 3 true               ;Assets/Sprites/Characters/Scout/red.png
+Character 3 true Move          ;Assets/Sprites/Characters/Scout/redMove.png
+Character 3 true Death         ;Assets/Sprites/Characters/Scout/redDeath.png
+Character 3 false              ;Assets/Sprites/Characters/Scout/blue.png
+Character 3 false Move         ;Assets/Sprites/Characters/Scout/blueMove.png
+Character 3 false Death        ;Assets/Sprites/Characters/Scout/blueDeath.png
 
 #Walls
 Wall Stone              ;Assets/Sprites/Walls/stone.png
@@ -28,4 +28,6 @@ Wall Wood               ;Assets/Sprites/Walls/wood.png
 Wall Gravel             ;Assets/Sprites/Walls/gravel.png
 
 #Weapons
-Weapon                  ;Assets/Sprites/Weapons/weapon.png
+Weapon 1                 ;Assets/Sprites/Weapons/weapon.png
+Weapon 2                 ;Assets/Sprites/Weapons/weapon.png
+Weapon 3                 ;Assets/Sprites/Weapons/weapon.png

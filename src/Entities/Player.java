@@ -4,6 +4,7 @@ import Resources.PictureLoader;
 import Resources.Props;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
@@ -17,25 +18,30 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Player extends Entity
 {
 
+    private Image flipped, unflipped;
     private static final String ENTITY = "ENTITY";
     public static final String TYPE = "CHARACTER";
     private static final String NAME = "PLAYER";
     private boolean onGround;
     private boolean viewDirectionRight;
     private Weapon weapon;
+    int id;
+    boolean red;
 
-    public Player(float x, float y, World world) throws SlickException
+    public Player(float x, float y, int id, World world) throws SlickException
     {
         super(x, y, world);
         viewDirectionRight = true;
-        setImage(PictureLoader.getImage("Soldier Red"));
-        int hBX = Props.getPropInt("Player.Soldier.Hitbox.X");
-        int hBY = Props.getPropInt("Player.Soldier.Hitbox.Y");
-        int hBW = Props.getPropInt("Player.Soldier.Hitbox.Width");
-        int hBH = Props.getPropInt("Player.Soldier.Hitbox.Height");
+        unflipped = PictureLoader.getImage("Character " + id + " " + red);
+        flipped = unflipped.getFlippedCopy(true, false);
+        setImage(unflipped);
+        int hBX = Props.getPropInt("Player." + id + ".Hitbox.X");
+        int hBY = Props.getPropInt("Player." + id + ".Hitbox.Y");
+        int hBW = Props.getPropInt("Player." + id + ".Hitbox.Width");
+        int hBH = Props.getPropInt("Player." + id + ".Hitbox.Height");
         setHitbox(hBX, hBY, hBW, hBH);
         addType(TYPE, ENTITY, NAME);
-        weapon = new Weapon(getPosition().x,getPosition().y, this);
+        weapon = new Weapon(getPosition().x, getPosition().y, id, this);
     }
 
     @Override
@@ -45,9 +51,7 @@ public class Player extends Entity
         weapon.update(gc, sbg, delta);
 
         if (!onGround)
-        {
             speed.y += 0.001 * delta;
-        }
         if (getInput().isKeyDown(Input.KEY_LEFT))
             speed.x -= 0.01;
         if (getInput().isKeyDown(Input.KEY_RIGHT))
@@ -56,34 +60,34 @@ public class Player extends Entity
             speed.y -= 0.6;
         if (getInput().isKeyDown(Input.KEY_DOWN))
             speed.y += 0.01;
-        
+
         if (!getInput().isKeyDown(Input.KEY_RIGHT) && !getInput().isKeyDown(Input.KEY_LEFT))
             speed.x /= 1.7;
-        
-        if(getInput().getMouseX() < gc.getWidth() / 2 && viewDirectionRight)
+
+        if (getInput().getMouseX() < gc.getWidth() / 2 && viewDirectionRight)
         {
-            setImage(PictureLoader.getImage("Soldier Red").getFlippedCopy(true,false));
+            setImage(flipped);
             viewDirectionRight = false;
         }
         else if (getInput().getMouseX() > gc.getWidth() / 2 && !viewDirectionRight)
         {
-            setImage(PictureLoader.getImage("Soldier Red"));
+            setImage(unflipped);
             viewDirectionRight = true;
         }
-        
-       
+
+
         speed.x = Math.min(Math.max(speed.x, -0.5f), 0.5f);
         speed.y = Math.min(Math.max(speed.y, -0.5f), 0.5f);
-        
+
         onGround = false;
-        
+
         Vector2f prevPosition = getPosition().copy();
         updateMovement(delta);
 
         if (world.collidesWithEntities(this, "wall") != null)
         {
             float dX = getPosition().x - prevPosition.x;
-            float dY = getPosition().y - prevPosition.y;               
+            float dY = getPosition().y - prevPosition.y;
             setPositionX(getPosition().x - dX);
             if (world.collidesWithEntities(this, "wall") != null)
             {
@@ -91,14 +95,12 @@ public class Player extends Entity
                 setPositionY(getPosition().y - dY);
                 speed.y = 0;
                 if (world.collidesWithEntities(this, "wall") != null)
-                     setPositionX(getPosition().x - dX);
+                    setPositionX(getPosition().x - dX);
                 else if (dY > 0)
                     onGround = true;
             }
             else
-            {
                 speed.x = 0;
-            }
             refreshPosition();
         }
     }
@@ -114,7 +116,7 @@ public class Player extends Entity
 
         getPosition().x += speed.x * delta;
         getPosition().y += speed.y * delta;
-        
+
         refreshPosition();
     }
 
@@ -128,6 +130,6 @@ public class Player extends Entity
     public void render(Graphics g, GameContainer gc)
     {
         super.render(g, gc);
-        weapon.render(g,gc);
+        weapon.render(g, gc);
     }
 }
