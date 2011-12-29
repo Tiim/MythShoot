@@ -28,8 +28,11 @@ public class InfoText extends Entity
     @Override
     public void render(Graphics g, GameContainer container)
     {
+        long mem = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) /  1000000 ;
+        
         String s = "FPS: " + container.getFPS()
-                + "\nEntities: " + world.getNrOfEntities("ENTITY");                     
+                + "\nEntities: " + world.getNrOfEntities("ENTITY")
+                + "\nMemory usage: " + mem + "MB";                     
         g.drawString(s,Props.getPropFloat("InfoText.X"),Props.getPropFloat("InfoText.Y"));
     } 
     

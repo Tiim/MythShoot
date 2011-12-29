@@ -53,9 +53,8 @@ public class World implements GameState
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException
     {
-        
-        for (Entity e : entities)
-            e.update(container, game, delta);
+        for(int i = 0; i < entities.size() ; ++i)
+            entities.get(i).update(container, game, delta);
         if (camera != null)
             camera.update();
     }
@@ -186,6 +185,11 @@ public class World implements GameState
     public void addEntities(Entity... entity)
     {
         entities.addAll(Arrays.asList(entity));
+    }
+    
+    public void removeEntities(Entity... entity)
+    {
+        entities.removeAll(Arrays.asList(entity));
     }
 
     public final List<Entity> getEntities(String... types)

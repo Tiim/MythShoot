@@ -31,3 +31,6 @@ Wall Gravel             ;Assets/Sprites/Walls/gravel.png
 Weapon 1                 ;Assets/Sprites/Weapons/weapon.png
 Weapon 2                 ;Assets/Sprites/Weapons/weapon.png
 Weapon 3                 ;Assets/Sprites/Weapons/weapon.png
+
+#Shots
+Shot 1                  ;Assets/Sprites/Shots/1.png

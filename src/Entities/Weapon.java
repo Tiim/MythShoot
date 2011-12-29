@@ -49,4 +49,11 @@ public class Weapon
         image.setRotation(rotation);
         image.draw(X,Y);
     }
+
+    public float getRotation()
+    {
+        return rotation;
+    }
+    
+    
 }

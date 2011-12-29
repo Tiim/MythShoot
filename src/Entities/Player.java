@@ -1,7 +1,10 @@
 package Entities;
 
+import Core.Log;
 import Resources.PictureLoader;
 import Resources.Props;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -25,6 +28,7 @@ public class Player extends Entity
     private boolean onGround;
     private boolean viewDirectionRight;
     private Weapon weapon;
+    private boolean lastUpdateMouseDown = false;
     int id;
     boolean red;
 
@@ -42,6 +46,7 @@ public class Player extends Entity
         setHitbox(hBX, hBY, hBW, hBH);
         addType(TYPE, ENTITY, NAME);
         weapon = new Weapon(getPosition().x, getPosition().y, id, this);
+        this.id = id;
     }
 
     @Override
@@ -49,32 +54,14 @@ public class Player extends Entity
     {
         super.update(gc, sbg, delta);
         weapon.update(gc, sbg, delta);
-
-        if (!onGround)
-            speed.y += 0.001 * delta;
-        if (getInput().isKeyDown(Input.KEY_LEFT))
-            speed.x -= 0.01;
-        if (getInput().isKeyDown(Input.KEY_RIGHT))
-            speed.x += 0.01;
-        if (getInput().isKeyDown(Input.KEY_UP) && onGround)
-            speed.y -= 0.6;
-        if (getInput().isKeyDown(Input.KEY_DOWN))
-            speed.y += 0.01;
-
-        if (!getInput().isKeyDown(Input.KEY_RIGHT) && !getInput().isKeyDown(Input.KEY_LEFT))
-            speed.x /= 1.7;
-
-        if (getInput().getMouseX() < gc.getWidth() / 2 && viewDirectionRight)
+        try
         {
-            setImage(flipped);
-            viewDirectionRight = false;
+            handleInput(gc, sbg, delta);
         }
-        else if (getInput().getMouseX() > gc.getWidth() / 2 && !viewDirectionRight)
+        catch (SlickException ex)
         {
-            setImage(unflipped);
-            viewDirectionRight = true;
+            Log.Exception(ex);
         }
-
 
         speed.x = Math.min(Math.max(speed.x, -0.5f), 0.5f);
         speed.y = Math.min(Math.max(speed.y, -0.5f), 0.5f);
@@ -103,6 +90,40 @@ public class Player extends Entity
                 speed.x = 0;
             refreshPosition();
         }
+    }
+    
+    private void handleInput(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
+    {
+        if (!onGround)
+            speed.y += 0.001 * delta;
+        if (getInput().isKeyDown(Input.KEY_LEFT))
+            speed.x -= 0.01;
+        if (getInput().isKeyDown(Input.KEY_RIGHT))
+            speed.x += 0.01;
+        if (getInput().isKeyDown(Input.KEY_UP) && onGround)
+            speed.y -= 0.6;
+        if (getInput().isKeyDown(Input.KEY_DOWN))
+            speed.y += 0.01;
+
+        if (!getInput().isKeyDown(Input.KEY_RIGHT) && !getInput().isKeyDown(Input.KEY_LEFT))
+            speed.x /= 1.7;
+
+        if (getInput().getMouseX() < gc.getWidth() / 2 && viewDirectionRight)
+        {
+            setImage(flipped);
+            viewDirectionRight = false;
+        }
+        else if (getInput().getMouseX() > gc.getWidth() / 2 && !viewDirectionRight)
+        {
+            setImage(unflipped);
+            viewDirectionRight = true;
+        }
+        
+        if (getInput().isMouseButtonDown(0) && !lastUpdateMouseDown)
+        {
+            world.addEntities(new Shot(getPosition().x + getImage().getWidth() / 2, getPosition().y + getImage().getHeight() / 2,weapon.getRotation(), id, this));
+        }
+        lastUpdateMouseDown = getInput().isMouseButtonDown(0);
     }
 
     private void updateMovement(int delta)

@@ -171,6 +171,11 @@ public abstract class Entity
         return shape;
     }
 
+    public void setShape(Shape shape)
+    {
+        this.shape = shape;
+    }
+
     public Vector2f getPosition()
     {
         return position;
@@ -216,12 +221,12 @@ public abstract class Entity
     
     public void refreshPosition()
     {
-        float xOffset = (world.camera != null && useCamera())? world.camera.getOffsetX(): 0 /*+ image.getWidth() / 2*/; 
-        float yOffset = (world.camera != null && useCamera())? world.camera.getOffsetY(): 0 /*+ image.getHeight() / 2*/; 
-        if (shape != null && hitboxOffset != null)
+        float xOffset = (world.camera != null && useCamera())? world.camera.getOffsetX(): 0; 
+        float yOffset = (world.camera != null && useCamera())? world.camera.getOffsetY(): 0; 
+        if (shape != null)
         {
-            shape.setX(position.x + hitboxOffset.x + xOffset);
-            shape.setY(position.y + hitboxOffset.y + yOffset);
+            shape.setX(position.x + ((hitboxOffset != null)? hitboxOffset.x : 0) + xOffset);
+            shape.setY(position.y + ((hitboxOffset != null)? hitboxOffset.y : 0) + yOffset);
         }
     }
     private void initEntity() throws SlickException
