@@ -12,8 +12,12 @@ import java.io.IOException;
  */
 public class Log
 {
-    
-    public static void Debug(Class c, Object message)
+    /**
+     * Displays debug messages if "Debug" int the Poprietyfile is {@code true}
+     * @param c The caller's class
+     * @param message The message (normally {@code String})
+     */
+    public synchronized static void Debug(Class c, Object message)
     {
         if (!Props.getPropBool("Debug"))
         {
@@ -24,14 +28,24 @@ public class Log
         System.out.println(out);
     }
     
-    public static void Warning(Class c, Object message)
+    
+    /**
+     * Displays and saves warning at "log.txt"
+     * @param c The caller's class
+     * @param message The message (normally {@code String})
+     */
+    public synchronized static void Warning(Class c, Object message)
     {
         String out = "WARNING:  [" + c.getName() + "]  " + message.toString();
         System.out.println(out);
         save(out);
     }
     
-    public static void Exception(Exception ex)
+    /**
+     * Displays and saves Exceptions
+     * @param ex the Exception
+     */
+    public synchronized static void Exception(Exception ex)
     {
             String out = "EXCEPTION:\n"; 
             out += "\t" + ex.getMessage() + "\n\n";
@@ -42,7 +56,10 @@ public class Log
             save(out);
     }
     
-    private static void save(String message)
+    /**
+     * @param message The string to save 
+     */
+    private synchronized static void save(String message)
     {
         try
         {
