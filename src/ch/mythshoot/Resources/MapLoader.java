@@ -1,8 +1,8 @@
-package Resources;
+package ch.mythshoot.Resources;
 
-import Core.Log;
-import Entities.Map;
-import Entities.World;
+import ch.mythshoot.Core.Log;
+import ch.mythshoot.Entities.Map;
+import ch.mythshoot.Entities.World;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

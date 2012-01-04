@@ -1,6 +1,6 @@
-package Resources;
+package ch.mythshoot.Resources;
 
-import Core.Log;
+import ch.mythshoot.Core.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

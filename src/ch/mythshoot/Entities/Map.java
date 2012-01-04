@@ -1,8 +1,8 @@
-package Entities;
+package ch.mythshoot.Entities;
 
-import Core.Log;
-import Resources.PictureLoader;
-import Resources.Props;
+import ch.mythshoot.Core.Log;
+import ch.mythshoot.Resources.PictureLoader;
+import ch.mythshoot.Resources.Props;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package Entities;
+package ch.mythshoot.Entities;
 
-import Resources.Props;
+import ch.mythshoot.Resources.Props;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;

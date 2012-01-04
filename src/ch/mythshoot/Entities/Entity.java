@@ -1,6 +1,6 @@
-package Entities;
+package ch.mythshoot.Entities;
 
-import Resources.Props;
+import ch.mythshoot.Resources.Props;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

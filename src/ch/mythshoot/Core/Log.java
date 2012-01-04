@@ -1,6 +1,6 @@
-package Core;
+package ch.mythshoot.Core;
 
-import Resources.Props;
+import ch.mythshoot.Resources.Props;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

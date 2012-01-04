@@ -1,4 +1,4 @@
-package Entities;
+package ch.mythshoot.Entities;
 
 import org.newdawn.slick.geom.Vector2f;
 

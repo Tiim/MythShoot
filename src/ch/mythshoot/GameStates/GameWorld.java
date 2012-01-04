@@ -1,11 +1,11 @@
-package GameStates;
+package ch.mythshoot.GameStates;
 
-import Entities.Player;
-import Entities.Camera;
-import Entities.Entity;
-import Entities.InfoText;
-import Entities.World;
-import Resources.MapLoader;
+import ch.mythshoot.Entities.Player;
+import ch.mythshoot.Entities.Camera;
+import ch.mythshoot.Entities.Entity;
+import ch.mythshoot.Entities.InfoText;
+import ch.mythshoot.Entities.World;
+import ch.mythshoot.Resources.MapLoader;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;

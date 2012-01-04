@@ -1,8 +1,8 @@
-package Entities;
+package ch.mythshoot.Entities;
 
-import Core.Log;
-import Resources.PictureLoader;
-import Resources.Props;
+import ch.mythshoot.Core.Log;
+import ch.mythshoot.Resources.PictureLoader;
+import ch.mythshoot.Resources.Props;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.newdawn.slick.GameContainer;

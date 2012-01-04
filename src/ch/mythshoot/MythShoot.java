@@ -1,11 +1,11 @@
-package MythShoot;
+package ch.mythshoot;
 
-import GameStates.GameWorld;
-import Core.Log;
-import Entities.World;
-import Resources.MapLoader;
-import Resources.PictureLoader;
-import Resources.Props;
+import ch.mythshoot.GameStates.GameWorld;
+import ch.mythshoot.Core.Log;
+import ch.mythshoot.Entities.World;
+import ch.mythshoot.Resources.MapLoader;
+import ch.mythshoot.Resources.PictureLoader;
+import ch.mythshoot.Resources.Props;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
