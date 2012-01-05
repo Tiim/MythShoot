@@ -1,11 +1,12 @@
-package ch.mythshoot.GameStates;
+package ch.mythshoot.client.gamestates;
 
-import ch.mythshoot.Entities.Player;
-import ch.mythshoot.Entities.Camera;
-import ch.mythshoot.Entities.Entity;
-import ch.mythshoot.Entities.InfoText;
-import ch.mythshoot.Entities.World;
-import ch.mythshoot.Resources.MapLoader;
+import ch.mythshoot.client.entities.Player;
+import ch.mythshoot.client.entities.Camera;
+import ch.mythshoot.client.entities.DebugLog;
+import ch.mythshoot.client.entities.Entity;
+import ch.mythshoot.client.entities.InfoText;
+import ch.mythshoot.client.entities.World;
+import ch.mythshoot.client.resources.MapLoader;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -99,6 +100,7 @@ public class GameWorld extends World
         
         /** Add the Infotext */
         addEntities(infoText = new InfoText(10,10,this));
+        addEntities(new DebugLog(this));
     }
 
 }

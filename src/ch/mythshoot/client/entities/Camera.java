@@ -1,5 +1,6 @@
-package ch.mythshoot.Entities;
+package ch.mythshoot.client.entities;
 
+import ch.mythshoot.client.util.recycler.VectorRecycler;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
@@ -32,8 +33,12 @@ public final class Camera
     /** Updates the offsetvariables */
     public void update()
     {
-        cameraPosition = this.toFollow.getPosition();
-        entityOffset = cameraPosition.negate();
+        VectorRecycler.getInstance().recycle(cameraPosition);
+        VectorRecycler.getInstance().recycle(entityOffset);
+        cameraPosition = VectorRecycler.getInstance().copy(this.toFollow.getPosition());
+        entityOffset = VectorRecycler.getInstance().copy(cameraPosition);
+        entityOffset.x = - entityOffset.x;
+        entityOffset.y = - entityOffset.y;
         entityOffset.x -= toFollow.getImage().getWidth() / 2;
         entityOffset.y -= toFollow.getImage().getHeight() / 2;
     }

@@ -1,4 +1,4 @@
-package ch.mythshoot.Resources;
+package ch.mythshoot.client.resources;
 
 import java.io.BufferedReader;
 import java.io.IOException;

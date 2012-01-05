@@ -1,6 +1,7 @@
-package ch.mythshoot.Entities;
+package ch.mythshoot.client.entities;
 
-import ch.mythshoot.Resources.Props;
+import ch.mythshoot.client.resources.Props;
+import ch.mythshoot.client.util.recycler.VectorRecycler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -183,6 +184,7 @@ public abstract class Entity
 
     public void setPosition(Vector2f position)
     {
+        VectorRecycler.getInstance().recycle(this.position);
         this.position = position;
         refreshPosition();
     }

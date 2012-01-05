@@ -1,4 +1,4 @@
-package ch.mythshoot.Resources;
+package ch.mythshoot.client.resources;
 
 import java.io.IOException;
 import java.util.Properties;

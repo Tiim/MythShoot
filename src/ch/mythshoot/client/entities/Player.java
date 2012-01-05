@@ -1,7 +1,8 @@
-package ch.mythshoot.Entities;
+package ch.mythshoot.client.entities;
 
-import ch.mythshoot.Resources.PictureLoader;
-import ch.mythshoot.Resources.Props;
+import ch.mythshoot.client.resources.PictureLoader;
+import ch.mythshoot.client.resources.Props;
+import ch.mythshoot.client.util.recycler.VectorRecycler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.newdawn.slick.GameContainer;
@@ -62,7 +63,7 @@ public class Player extends Entity
 
         onGround = false;
 
-        Vector2f prevPosition = getPosition().copy();
+        Vector2f prevPosition = VectorRecycler.getInstance().copy(getPosition());
         updateMovement(delta);
 
         if (world.collidesWithEntities(this, "wall") != null)
@@ -84,6 +85,7 @@ public class Player extends Entity
                 speed.x = 0;
             refreshPosition();
         }
+        VectorRecycler.getInstance().recycle(prevPosition);
     }
     
     private void handleInput(GameContainer gc, StateBasedGame sbg, int delta)

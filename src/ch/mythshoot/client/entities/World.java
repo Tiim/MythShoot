@@ -1,4 +1,4 @@
-package ch.mythshoot.Entities;
+package ch.mythshoot.client.entities;
 
 import java.util.ArrayList;
 import java.util.Arrays;

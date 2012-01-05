@@ -1,10 +1,11 @@
-package ch.mythshoot;
+package ch.mythshoot.client;
 
-import ch.mythshoot.GameStates.GameWorld;
-import ch.mythshoot.Entities.World;
-import ch.mythshoot.Resources.MapLoader;
-import ch.mythshoot.Resources.PictureLoader;
-import ch.mythshoot.Resources.Props;
+import ch.mythshoot.client.gamestates.GameWorld;
+import ch.mythshoot.client.entities.World;
+import ch.mythshoot.client.resources.MapLoader;
+import ch.mythshoot.client.resources.PictureLoader;
+import ch.mythshoot.client.resources.Props;
+import ch.mythshoot.client.crash.LogDisplayManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.newdawn.slick.AppGameContainer;
@@ -39,6 +40,7 @@ public class MythShoot extends StateBasedGame
     {
         /** Initialise the settingsloader */
         Props.initLoader();
+        Logger.getLogger("").addHandler(LogDisplayManager.getInstance());
         try
         {
             /** Get the windowheight */

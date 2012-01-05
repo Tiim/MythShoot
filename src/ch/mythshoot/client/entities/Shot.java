@@ -1,7 +1,7 @@
-package ch.mythshoot.Entities;
+package ch.mythshoot.client.entities;
 
-import ch.mythshoot.Resources.PictureLoader;
-import ch.mythshoot.Resources.Props;
+import ch.mythshoot.client.resources.PictureLoader;
+import ch.mythshoot.client.resources.Props;
 import java.util.logging.Logger;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
