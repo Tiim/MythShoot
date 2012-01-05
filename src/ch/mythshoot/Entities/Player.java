@@ -1,6 +1,5 @@
 package ch.mythshoot.Entities;
 
-import ch.mythshoot.Core.Log;
 import ch.mythshoot.Resources.PictureLoader;
 import ch.mythshoot.Resources.Props;
 import java.util.logging.Level;
@@ -20,7 +19,8 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Player extends Entity
 {
-
+    private static final Logger LOGGER = Logger.getLogger(Player.class.getName());
+    
     private Image flipped, unflipped;
     private static final String ENTITY = "ENTITY";
     public static final String TYPE = "CHARACTER";
@@ -36,7 +36,7 @@ public class Player extends Entity
     {
         super(x, y, world);
         viewDirectionRight = true;
-        unflipped = PictureLoader.getImage("Character " + id + " " + red);
+        unflipped = PictureLoader.getInstance().getImage("Character " + id + " " + red);
         flipped = unflipped.getFlippedCopy(true, false);
         setImage(unflipped);
         int hBX = Props.getPropInt("Player." + id + ".Hitbox.X");
@@ -54,14 +54,8 @@ public class Player extends Entity
     {
         super.update(gc, sbg, delta);
         weapon.update(gc, sbg, delta);
-        try
-        {
-            handleInput(gc, sbg, delta);
-        }
-        catch (SlickException ex)
-        {
-            Log.Exception(ex);
-        }
+        
+        handleInput(gc, sbg, delta);
 
         speed.x = Math.min(Math.max(speed.x, -0.5f), 0.5f);
         speed.y = Math.min(Math.max(speed.y, -0.5f), 0.5f);
@@ -92,7 +86,7 @@ public class Player extends Entity
         }
     }
     
-    private void handleInput(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
+    private void handleInput(GameContainer gc, StateBasedGame sbg, int delta)
     {
         if (!onGround)
             speed.y += 0.001 * delta;
@@ -121,7 +115,14 @@ public class Player extends Entity
         
         if (getInput().isMouseButtonDown(0) && !lastUpdateMouseDown)
         {
-            world.addEntities(new Shot(getPosition().x + getImage().getWidth() / 2, getPosition().y + getImage().getHeight() / 2,weapon.getRotation(), id, this));
+            try
+            {
+                world.addEntities(new Shot(getPosition().x + getImage().getWidth() / 2, getPosition().y + getImage().getHeight() / 2,weapon.getRotation(), id, this));
+            }
+            catch (SlickException ex)
+            {
+                LOGGER.log(Level.WARNING,"Unable to make a bullet", ex);
+            }
         }
         lastUpdateMouseDown = getInput().isMouseButtonDown(0);
     }

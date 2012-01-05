@@ -1,10 +1,11 @@
 package ch.mythshoot.Resources;
 
-import ch.mythshoot.Core.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.ResourceLoader;
@@ -16,12 +17,24 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public class PictureLoader
 {  
-    private static HashMap<String,Image> images;
+    private HashMap<String,Image> images;
     
+    private static final PictureLoader INSTANCE = new PictureLoader();
     
-    public static void initLoader()
+    private static final Logger LOGGER = Logger.getLogger(PictureLoader.class.getName());
+    
+    private PictureLoader()
     {
         images = new HashMap<String, Image>();
+    }
+    
+    public static PictureLoader getInstance()
+    {
+        return INSTANCE;
+    }
+    
+    public void initLoader()
+    {
         BufferedReader reader = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(Props.getPropStr("Resource.Picture.Path"))));
         try
         {
@@ -29,7 +42,6 @@ public class PictureLoader
             while ((line = reader.readLine()) != null )
             {
                 line = line.trim();
-                Log.Debug(PictureLoader.class,line);
                 
                 if (line == null || line.isEmpty() || line.startsWith("#"))
                 {
@@ -44,17 +56,17 @@ public class PictureLoader
                 }
                 catch (SlickException ex)
                 {
-                    Log.Exception(ex);
+                    LOGGER.log(Level.WARNING, "Unable to create image " + path, ex);
                 }
             }
         }
         catch (IOException ex)
         {
-            Log.Exception(ex);
+            LOGGER.log(Level.SEVERE, "Unable to initialise the picture loader", ex);
         }
     }
     
-    public static Image getImage(String key) throws SlickException
+    public Image getImage(String key) throws SlickException
     {
         Image img = images.get(key.trim());
         if (img == null)

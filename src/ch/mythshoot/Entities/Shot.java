@@ -1,8 +1,8 @@
 package ch.mythshoot.Entities;
 
-import ch.mythshoot.Core.Log;
 import ch.mythshoot.Resources.PictureLoader;
 import ch.mythshoot.Resources.Props;
+import java.util.logging.Logger;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -16,6 +16,8 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Shot extends Entity
 {
+    private static final Logger LOGGER = Logger.getLogger(Shot.class.getName());
+    
     Entity owner;
     float maxSpeed;
     
@@ -24,7 +26,7 @@ public class Shot extends Entity
     {
         super(X, Y, owner.world);
         maxSpeed = Props.getPropFloat("Shot." + id +".Speed");
-        setImage(PictureLoader.getImage("Shot " + id).copy());
+        setImage(PictureLoader.getInstance().getImage("Shot " + id).copy());
         getImage().setRotation(angle);
         speed = new Vector2f((float)Math.cos(Math.toRadians(angle))* maxSpeed,(float)Math.sin(Math.toRadians(angle))* maxSpeed);
         addType("shot");

@@ -27,7 +27,7 @@ public class Weapon
         this.Y = Y;
         this.owner = owner;
         this.id = id;
-        this.image = PictureLoader.getImage("Weapon " + id);
+        this.image = PictureLoader.getInstance().getImage("Weapon " + id);
         debug = Props.getPropBool("Debug");
     }
     

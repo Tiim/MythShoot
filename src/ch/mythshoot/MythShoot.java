@@ -1,11 +1,12 @@
 package ch.mythshoot;
 
 import ch.mythshoot.GameStates.GameWorld;
-import ch.mythshoot.Core.Log;
 import ch.mythshoot.Entities.World;
 import ch.mythshoot.Resources.MapLoader;
 import ch.mythshoot.Resources.PictureLoader;
 import ch.mythshoot.Resources.Props;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -20,6 +21,8 @@ public class MythShoot extends StateBasedGame
 {
     /** ID of the game world state */
     public static final int GAME_WORLD_ID = 1;
+    
+    private static final Logger LOGGER = Logger.getLogger(MythShoot.class.getName());
 
     /** 
      * @param name Windowtitle
@@ -42,8 +45,6 @@ public class MythShoot extends StateBasedGame
             int width = Props.getPropInt("Graphic.DisplayMode.Width");
             /** Get the windowwidth */
             int height = Props.getPropInt("Graphic.DisplayMode.Height");
-            /** Get desired frames per second */
-            int fps = Props.getPropInt("Graphic.FrameRate");
             /** Get the fulscreen boolean */
             boolean fullscreen = Props.getPropBool("Graphic.DisplayMode.Fullscreen");
             
@@ -55,15 +56,13 @@ public class MythShoot extends StateBasedGame
             gc.setMouseGrabbed(false);
             /** Show no FPS, we can do that ourselves */
             gc.setShowFPS(false);
-            /** Set the desired FPS */
-            gc.setTargetFrameRate(fps);
             /** Start our game */
             gc.start();
         }
         catch (SlickException ex)
         {
             /** Log slick exceptions */
-            Log.Exception(ex);
+            LOGGER.log(Level.SEVERE, "Error in main method", ex);
         }
     }
 
@@ -75,7 +74,7 @@ public class MythShoot extends StateBasedGame
     public void initStatesList(GameContainer container) throws SlickException
     {
         /** Initialise picture loader */
-        PictureLoader.initLoader();
+        PictureLoader.getInstance().initLoader();
         
         /** Initialise the game world */
         World gs = new GameWorld(GAME_WORLD_ID, container);
@@ -83,6 +82,6 @@ public class MythShoot extends StateBasedGame
         addState(gs);
 
         /** Load the maps */
-        MapLoader.initLoader(gs);
+        MapLoader.getInstance().initLoader(gs);
     }
 }

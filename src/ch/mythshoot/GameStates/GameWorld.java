@@ -90,7 +90,7 @@ public class GameWorld extends World
     private void addEntities() throws SlickException
     {
         /** Add all wall elements */
-        addEntities(MapLoader.getMap("Fort"));
+        addEntities(MapLoader.getInstance().getMap("Fort"));
         /** Add the Player */
         Entity player = new Player(container.getWidth() / 2, container.getHeight() / 2,1,this);
         addEntities(player);
